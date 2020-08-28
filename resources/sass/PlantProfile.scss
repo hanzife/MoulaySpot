@@ -1,0 +1,330 @@
+$font-stack: Roboto, sans-serif;
+$primary-color: rgba(8, 111, 115, 1);
+$grey: rgba(88, 88, 99, 1);
+$primary-Gradient:linear-gradient(#06787c, #00a2a7);
+body{
+    #Container {
+        position: relative;
+        width: 100%;
+        top: 110px;
+		height: 622px;
+        display: flex;
+        // justify-content: space-between;
+        #c-Product{
+            position: relative;
+			width: 502px;
+			height: 622px;
+			left: 0px;
+            top: 0px;
+            // float: left;
+            #c-Image {
+                position: relative;
+                width: 502px;
+                height: 507px;
+                img{
+                position: absolute;
+
+                    width: 502px;
+                    height: 100%;
+
+                    border-radius: 10px;
+                    // height: 100%;
+                }
+            }
+            #btn-c-P-AddtoCart{
+                background-color: $primary-color;
+                color: white;
+                font-size: 21px;
+                font-family: $font-stack;
+                cursor: pointer;
+                white-space: nowrap;
+                position: relative;
+                width: 502px;
+                height: 75px;
+                border-radius: 10px;
+                border:none;
+                top: 35px;
+                overflow: visible;
+            }
+
+        }
+        #c-Details{
+            position: relative;
+            // float: right;
+			width: 60%;
+            height: 622.5px;
+            height: 622px;
+			left: 95px;
+			top: 0px;
+            overflow: visible;
+            
+            h1{
+                margin-top: 0px;
+			    font-family: Roboto;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 50px;
+            }
+            #description {
+                // left: 0px;
+                top: 10px;
+                position: relative;
+                margin-top: -25px;
+
+                // overflow: visible;
+                width: 750px;
+                // height: 52px;
+                font-family: Roboto;
+                font-size: 20px;
+                color: rgba(20, 18, 24, 1);
+            }
+
+            #c-Conditions {
+                margin-top: 40px;
+                #Conditions {
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: $grey;
+                }
+
+                    #Conditions_c {
+                        position: relative;
+                        // background-color: red;
+                        width: 400px;
+                        height: 39px;
+                        display: flex;
+                        justify-content: space-between;
+                        .Info{
+                            // left: 45px;
+                            // top: 7px;
+                            position: relative;
+                            overflow: visible;
+                            // width: 60px;
+                            
+                            white-space: nowrap;
+                            text-align: left;
+                            font-family: Roboto;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 23px;
+                            color: rgba(88, 88, 99, 1);
+
+                        }
+                        img{
+                            width: 35px;
+                            margin-right: 5px;
+                        }
+                        span{
+                            position: relative;
+                            top: -5px;
+                            // padding: 0 auto;
+                            // margin: auto;
+                        }
+                    }
+            }
+               //Images
+               #c-Images{
+                    position: relative;
+                    top: 35px;
+                    // bottom: -00px;
+                    width: 100%;
+                    height: auto;
+                    // background-color: rebeccapurple;
+                  
+                
+                h2{
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: black;
+                }
+                #Images {
+                    position: relative;
+                    top: 15px;
+                    width: 799px;
+                    height: 178px;
+                    left: 0px;
+                    // top: 43px;
+                    display: flex;
+                    justify-content: space-between;
+                    overflow: visible;
+                    img{
+                        width: 178px;
+                        border-radius: 8px;
+                        opacity: 0.5;
+                    }
+                    .activeImg, img:hover{
+                        border: 3px solid #009FA4;
+                        // filter: drop-shadow(0px 0px 3px $primary-color);
+                        opacity: 1;
+                    }
+                }
+               
+            }
+
+        }
+       
+       
+
+
+    }
+
+      //Empty Erea
+      ._blank{
+        position: relative;
+        width: 100%;
+        height: 120px;
+        z-index: -1;
+    }
+
+    #Related-Container {
+        float: right;
+        position: relative;
+        right: 0;
+		width: 61%;
+        height: 331px;
+        #R-Title{
+            width: 854px;
+            
+             height: 26px;
+             h2{
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 25px;
+                color: rgba(20, 18, 24, 1);
+                float: left;
+                // position: relative;
+                // right: 0;
+                // top: -15px;
+                position: relative;
+                top: -24px;
+            }
+            a{
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 20px;
+                color: rgba(20, 18, 24, 1);
+                float: right;
+               
+               
+            }
+        }
+        #Products-related{
+            position: absolute;
+            width: 854px;
+            
+			height: 268px;
+            top: 63px;
+            display: flex;
+            justify-content: space-between;
+            .r-Product {
+                position: relative;
+                width: 235px;
+                height: 268px;
+                text-align: center;
+                height: 268px;
+                left: 0px;
+                top: 0px;
+                overflow: visible;
+                background-color: white;
+                border-radius: 10px;
+                filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.161));
+			    .ProductImage {
+                    // width: 207px;
+                    height: auto;
+                    a{
+                        text-decoration: none;
+                        color: black;
+                    }
+                    .Product-fav{
+                        position: absolute;
+                        margin-left: -50px;
+                        margin-top: 20px;
+                        z-index: 1;
+                        width: 40px;
+                        height: 40px;
+                        align-items: center;
+                        justify-content: center;
+                        background: white;
+                        border: none;
+                        border-radius: 9999px;
+                        cursor: pointer;
+                    }
+                    .Product-fav:hover svg path {
+                        stroke: #ff6868;
+                      }
+                      .Product-fav-liked svg path {
+                        fill: #ff6868;
+                        stroke: #ff6868;
+                      }
+                      .PlantProfile-img{
+                          height: 200;
+
+                           //Btn Add To Carte
+                    .btn-AddCarte{
+                        background-image: $primary-Gradient;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        border: none;
+                        position: absolute;
+                        right: 28px;
+                        float: right;
+                        // top: 37px;
+                        bottom: 55px;
+                        text-align: center;
+                        cursor: pointer;
+                        .Addme{
+                            display: block;
+                            width: 16px;
+                            height: 16px;
+                            // margin-right: 13%;
+                            // margin-left: 14%;
+                            margin-top: 8px;
+                            margin-bottom: 8px;
+                            margin-left: 4px;
+
+                        }
+                        .Addedme{
+                            display: none;
+                        }
+                     
+                    }
+                    .btn-AddCarte-Added{
+                        .Addme{
+                            display: none;
+                        }
+                        .Addedme{
+                            display: block;
+
+                            width: 16px;
+                            // margin-left: 8px;
+                            height: 16px;
+                            // margin-right: 13%;
+                            margin-top: 8px;
+                            margin-bottom: 8px;
+                            margin-left: 4px;
+                        }
+                    }  
+                      }
+                   
+                    .Product-image{
+                        position: relative;
+                        top: 12px;
+                        width: 207px;
+                    }
+                    h3{
+                        // float: left;
+			            font-size: 20px;
+                        text-overflow: ellipsis;
+                    }
+
+
+                }
+			
+            }
+        }
+    }
+}
+
