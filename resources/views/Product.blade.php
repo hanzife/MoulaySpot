@@ -16,13 +16,42 @@
                 <!-- <img id="Product-image_ec" src="/Images/Haworthia Attenuata.jpg"> -->
                 <img class="Product-image_ec" id="expandedImg" src="/Images/Plants/{{$rowPlant->reference}}">   
             </div>
-            <!-- <button id="btn-c-P-AddtoCart">
-                <span>{{$rowPlant->price}}</span> - Add to Cart
-                Sign Up
+            @if(Auth::check())
+             <button id="btn-c-P-AddtoCart" class="btn-AddCarte">
+                <input type="hidden" class="addCarte" value="{{$rowPlant->id}}">
+                <span class="Addme"><span>{{$rowPlant->price}}</span> - Add to Cart</span> 
+                <span class="Addedme">✓ Added to carte</span> 
+            </button>
+<!--
+            <button style="display:none;" id="btn-c-P-AddtoCarts" class="btn-AddCarte btn-AddCarte-Added">
+                <input type="hidden" class="addCarte" value="{{$rowPlant->id}}">
+                added
             </button> -->
+
+            <!-- @foreach($shopping_cartes as $shopping_carte)
+            @if($shopping_carte->id_plants == $rowPlant->id && $shopping_carte->id_User ==  Auth::id() )
+            <button id="btn-c-P-AddtoCart" class="btn-AddCarte btn-AddCarte-Added">
+                <input type="hidden" class="addCarte" value="{{$rowPlant->id}}">
+                added
+            </button>
+           
+            @endif
+            @endforeach -->
+<!--            
+            
+            <button id="btn-c-P-AddtoCart" class="btn-AddCarte">
+                <input type="hidden" class="addCarte" value="{{$rowPlant->id}}">
+                <span>{{$rowPlant->price}}</span> - Add to Cart
+            </button>
+           
+
+           -->
+
+            @else
             <button id="btn-c-P-AddtoCart">
             Sign Up
             </button>
+            @endif
         </div>
         <!-- Right Side -->
 
@@ -52,7 +81,7 @@
                    
                     <div class="Info">
                         <img src="/Images/heart.png" alt="">
-                        <span>6</span>
+                        <span>{{$CountLikes}}</span>
                     </div>
                 </div>
 
@@ -80,10 +109,7 @@
                         </rect>
                     </svg> -->
                 </div>
-                <!-- <svg class="Indicator" viewBox="0 0 177 2">
-                    <path id="Indicator" d="M 0 0 L 177 0">
-                    </path>
-                </svg> -->
+               
             </div>
         </div>
 
@@ -106,18 +132,50 @@
                 <div class="ProductImage">
                     <div class="PlantProfile-img">
                         <img class="Product-image"   src="/Images/Plants/{{$related->reference}}">
-                        <!-- <button class="Product-fav">
+                        @if(Auth::check())
+                        <button class="Product-fav">
+                            <input type="hidden" class="LikeProduct" value="{{$related->id}}">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M4.31804 6.31804C3.90017 6.7359 3.5687 7.23198 3.34255 7.77795C3.1164 8.32392 3 8.90909 3 9.50004C3 10.091 3.1164 10.6762 3.34255 11.2221C3.5687 11.7681 3.90017 12.2642 4.31804 12.682L12 20.364L19.682 12.682C20.526 11.8381 21.0001 10.6935 21.0001 9.50004C21.0001 8.30656 20.526 7.16196 19.682 6.31804C18.8381 5.47412 17.6935 5.00001 16.5 5.00001C15.3066 5.00001 14.162 5.47412 13.318 6.31804L12 7.63604L10.682 6.31804C10.2642 5.90017 9.7681 5.5687 9.22213 5.34255C8.67616 5.1164 8.09099 5 7.50004 5C6.90909 5 6.32392 5.1164 5.77795 5.34255C5.23198 5.5687 4.7359 5.90017 4.31804 6.31804V6.31804Z"
                                     stroke="#676878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </button> -->
-                        <!-- <button class="btn-AddCarte">
+                        </button>
+                        @foreach($favorites as $favorite)
+                        <?php $className='Product-fav Product-fav-liked' ?>
+                        @if($favorite->id_plants == $related->id && $favorite->id_User ==  Auth::id() )
+                        <?php $className .= ' Product-fav-liked' ?>
+                        <button class="{{$className}}">
+                            <input type="hidden" class="LikeProduct" value="{{$related->id}}">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M4.31804 6.31804C3.90017 6.7359 3.5687 7.23198 3.34255 7.77795C3.1164 8.32392 3 8.90909 3 9.50004C3 10.091 3.1164 10.6762 3.34255 11.2221C3.5687 11.7681 3.90017 12.2642 4.31804 12.682L12 20.364L19.682 12.682C20.526 11.8381 21.0001 10.6935 21.0001 9.50004C21.0001 8.30656 20.526 7.16196 19.682 6.31804C18.8381 5.47412 17.6935 5.00001 16.5 5.00001C15.3066 5.00001 14.162 5.47412 13.318 6.31804L12 7.63604L10.682 6.31804C10.2642 5.90017 9.7681 5.5687 9.22213 5.34255C8.67616 5.1164 8.09099 5 7.50004 5C6.90909 5 6.32392 5.1164 5.77795 5.34255C5.23198 5.5687 4.7359 5.90017 4.31804 6.31804V6.31804Z"
+                                    stroke="#676878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        @endif
+                        @endforeach
+                        <button class="btn-AddCarte">
+                            <input type="hidden" class="addCarte" value="{{$related->id}}">
                             <img src="/Images/btn-AddToCart.png" class="Addme" alt="">
                             <img src="/Images/Added.png" class="Addedme" alt="">
-                        </button> -->
+                        </button>
+                        @foreach($shopping_cartes as $shopping_carte)
+                        <?php $classCarte='btn-AddCarte btn-AddCarte-Added' ?>
+                        @if($shopping_carte->id_plants == $related->id && $shopping_carte->id_User == Auth::id() )
+                        <?php $classCarte .= ' btn-AddCarte-Added' ?>
+                        <button class="{{$classCarte}}">
+                            <input type="hidden" class="addCarte" value="{{$related->id}}">
+
+                            <img src="/Images/btn-AddToCart.png" class="Addme" alt="">
+                            <img src="/Images/Added.png" class="Addedme" alt="">
+                        </button>
+                        @endif
+                        @endforeach
+                        @endif
+
                     </div>
                     <a href="../Product/{{$related->id}}"><h3>{{$related->name}}</h3></a>
                 </div>
@@ -148,6 +206,7 @@
 
 
     </div>
+
     <div class="_blank"></div>
     <div class="_blank"></div>
     <div class="_blank"></div>

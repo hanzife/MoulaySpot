@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use image;
+use auth;
 class HomeController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         //Give me 3 plants
         $Plants = DB::table('plants')
         ->join('images','images.id_plants','=','id')
@@ -18,8 +18,10 @@ class HomeController extends Controller
         ->select('images.reference','plants.name','plants.family','plants.price','plants.id')
         ->get();
 
+        //Loged ?
+        $Customer = Auth::user();
         //Redirect to View welcome.php
-        return view('welcome',compact('Plants'));
+        return view('welcome',compact('Plants','Customer'));
     }
       
         

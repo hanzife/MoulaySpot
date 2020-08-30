@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use auth;
+use App\ShoppingCarte;
+use App\Favorite;
+
 class ProductsController extends Controller
 {
     public function index(){
@@ -18,7 +22,17 @@ class ProductsController extends Controller
         $CountPlants = count($Plants);
         $selectedSelector = "All Families";
         //Redirect to View welcome.php
-        return view('shop',compact('Plants','selectedSelector','CountPlants'));
+
+        //GET FAVE
+        $favorites = DB::table('favorites')
+        ->select('favorites.id_User','favorites.id_plants')
+        ->get();
+
+        $shopping_cartes = DB::table('shopping_cartes')
+        ->select('shopping_cartes.id_User','shopping_cartes.id_plants')
+        ->get();
+
+        return view('shop',compact('Plants','selectedSelector','CountPlants','favorites','shopping_cartes'));
     }
 
     public function show($Family){
@@ -35,8 +49,17 @@ class ProductsController extends Controller
 
         $selectedSelector = $Family;
 
+        //GET FAVE
+        $favorites = DB::table('favorites')
+        ->select('favorites.id_User','favorites.id_plants')
+        ->get();
+
+        $shopping_cartes = DB::table('shopping_cartes')
+        ->select('shopping_cartes.id_User','shopping_cartes.id_plants')
+        ->get();
+
         //Redirect to View welcome.php
-        return view('shop',compact('Plants','selectedSelector','CountPlants'));
+        return view('shop',compact('Plants','selectedSelector','CountPlants','favorites','shopping_cartes'));
     }
 
     public function showItem($id){
@@ -72,7 +95,63 @@ class ProductsController extends Controller
         ->where('plants.id','=',$id)
         ->select('Hardiness_img','Hardiness','Position_img','Position')
         ->get();
-        return view('Product',compact('Plant','Images','RelatedPlants','myfamily','conditions'));
+
+        $numLikes = DB::table('favorites')
+        ->where('favorites.id_plants','=',$id)
+        ->select('id_plants')
+        ->get();
+        
+        $CountLikes = count($numLikes);
+
+        //GET FAVE
+        $favorites = DB::table('favorites')
+        ->select('favorites.id_User','favorites.id_plants')
+        ->get();
+
+        $shopping_cartes = DB::table('shopping_cartes')
+        ->select('shopping_cartes.id_User','shopping_cartes.id_plants')
+        ->get();
+
+        // $thisplant = DB::table('shopping_cartes')
+        // ->where('shopping_cartes.id_User','=',Auth::id())
+        // ->where('shopping_cartes.id_plants','=',$id)
+        // ->select('shopping_cartes.id_User','shopping_cartes.id_plants')
+        // ->get();
+
+        return view('Product',compact('Plant','Images','RelatedPlants','myfamily','conditions','CountLikes','favorites','shopping_cartes'));
+    }
+
+    public function AddCarte($id_Plant,Request $request){
+       $idCustomer = Auth::id();
+       $bool = $request->product_added;
+       
+        if($bool == "false"){
+            ShoppingCarte::insert( [
+                'id_User' => $idCustomer,
+                'id_plants' =>$id_Plant,
+            ]);
+        }
+        else{
+            DB::table('shopping_cartes')->where('id_User', '=', $idCustomer)
+            ->where('id_plants', '=', $id_Plant)
+            ->delete();
+        }
+    }
+
+    public function Like($id_Plant,Request $request){
+        $idCustomer = Auth::id();
+        $bool = $request->product_added;
+        if($bool == "false"){
+            Favorite::insert( [
+                'id_User' => $idCustomer,
+                'id_plants' =>$id_Plant,
+            ]);
+        }
+        else{
+            DB::table('favorites')->where('id_User', '=', $idCustomer)
+            ->where('id_plants', '=', $id_Plant)
+            ->delete();
+        }
     }
 
 }

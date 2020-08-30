@@ -6,7 +6,7 @@
 
 @section('content')
 
-
+    <!-- hello {{$Customer->name ?? ''}} -->
     <!-- Hero -->
     <div id="Hero">
         <!-- <svg style="width:inherit;height:inherit;overflow:visible;">
